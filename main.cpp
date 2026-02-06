@@ -21,9 +21,34 @@ void printMenu()
     std::cout << "====================" << std::endl;
 
 }
+
+void printHelp()
+{
+    std::cout << "Help - your aim is to make money. Analyse the market and makes bids and offers" << std::endl;
+}
+void printMarketStats()
+{
+   std::cout << "Markets looks good" << std::endl;
+}
+void enterOffer()
+{
+    std::cout << "Make an offer - enter the amount" << std::endl;
+}
+void enterBid()
+{
+    std::cout << "Make a bid - enter the amount" << std::endl;
+}
+void printWallet()
+{
+    std::cout << "Your wallet is empty" << std::endl;
+}
+void goToNextTimeFrame()
+{
+    std::cout << "Going to next time frame" << std::endl;
+}
 int getUserOption(){
     int userInput;
-    std::cout << "Type in 0-6" << std::endl;
+    std::cout << "Type in 1-7" << std::endl;
     std::cin >> userInput;
     std:: cout << "You chose: " << userInput << std::endl;
     return userInput;
@@ -32,29 +57,29 @@ void processUserOption(int option){
     switch (option)
     {
         case 1:
-            std::cout << "Help - your aim is to make money. Analyse the market and makes bids and offers" << std::endl;
+            printHelp();
             break;
         case 2:
-            std::cout << "Markets looks good" << std::endl;
+            printMarketStats();
             break;
         case 3:
-            std::cout << "Make an offer - enter the amount" << std::endl;
+            enterOffer();
             break;
         case 4:
-            std::cout << "Make a bid - enter the amount" << std::endl;
+            enterBid();
             break;
         case 5:
-            std::cout << "Your wallet is empty" << std::endl;
+            printWallet();
             break;
         case 6:
-            std::cout << "Going to next time frame" << std::endl;
+            goToNextTimeFrame();
             break;
         case 7:
             std::cout << "Exiting program." << std::endl;
             isRunning = false;
             break;
         default:
-            std::cout << "Invalid choice. Choose 0-7." << std::endl;
+            std::cout << "Invalid choice. Choose 1-7." << std::endl;
             break;
     }
 }
