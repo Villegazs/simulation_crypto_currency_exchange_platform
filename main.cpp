@@ -1,5 +1,40 @@
 #include <iostream>
+#include <string>
+#include <vector>
 bool isRunning = true;
+
+enum class OrderBookType
+{
+    bid,
+    ask
+};
+
+OrderBookType orderType = OrderBookType::bid;
+
+class OrderBookEntry
+{
+     public:
+        OrderBookEntry(double price
+                    , double amount
+                    , std::string timeStamp
+                    , std::string product
+                    , OrderBookType orderType)
+        {
+            this->price = price;
+            this->amount = amount;
+            this->timeStamp = timeStamp;
+            this->product = product;
+            this->orderType = orderType;
+        }
+
+        double price;
+        double amount;
+        std::string timeStamp;
+        std::string product;
+        OrderBookType orderType;
+        
+};
+
 void printMenu()
 {
 
@@ -86,12 +121,26 @@ void processUserOption(int option){
 
 int main(){
 
-    while(isRunning)
-    {
-        printMenu();
-        int userOption = getUserOption();
-        processUserOption(userOption);
-    }
+    //while(isRunning)
+    //{
+    //    printMenu();
+    //    int userOption = getUserOption();
+    //    processUserOption(userOption);
+    //}
+
+    OrderBookEntry order1 {
+        10000,
+        0.001,
+        "2020/03/17 17:01:24.884492",
+        "BTC/USD",
+        OrderBookType::bid
+    };
+
+    std::cout << "Order details: " << std::endl;
+    std::cout << "Price: " << order1.price << std::endl;
+    std::cout << "Amount: " << order1.amount << std::endl;
+    std::cout << "Timestamp: " << order1.timeStamp << std::endl;
+    std::cout << "Product: " << order1.product << std::endl;
 
     return 0;
 }
