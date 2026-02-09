@@ -25,7 +25,7 @@ class OrderBookEntry
         , product(product)
         , orderType(orderType)
         {
-            
+
         }
 
         double price;
@@ -129,19 +129,23 @@ int main(){
     //    processUserOption(userOption);
     //}
 
-    OrderBookEntry order1 {
+    std::vector<OrderBookEntry> orders;
+
+
+
+    orders.push_back(OrderBookEntry{
         10000,
         0.001,
         "2020/03/17 17:01:24.884492",
         "BTC/USD",
         OrderBookType::bid
-    };
+    });
 
     std::cout << "Order details: " << std::endl;
-    std::cout << "Price: " << order1.price << std::endl;
-    std::cout << "Amount: " << order1.amount << std::endl;
-    std::cout << "Timestamp: " << order1.timeStamp << std::endl;
-    std::cout << "Product: " << order1.product << std::endl;
+    std::cout << "Price: " << orders[0].price << std::endl;
+    std::cout << "Amount: " << orders[0].amount << std::endl;
+    std::cout << "Timestamp: " << orders[0].timeStamp << std::endl;
+    std::cout << "Product: " << orders[0].product << std::endl;
 
     return 0;
 }
