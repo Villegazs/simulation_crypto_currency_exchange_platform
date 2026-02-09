@@ -19,12 +19,13 @@ class OrderBookEntry
                     , std::string timeStamp
                     , std::string product
                     , OrderBookType orderType)
+        : price(price)
+        , amount(amount)
+        , timeStamp(timeStamp)
+        , product(product)
+        , orderType(orderType)
         {
-            this->price = price;
-            this->amount = amount;
-            this->timeStamp = timeStamp;
-            this->product = product;
-            this->orderType = orderType;
+            
         }
 
         double price;
