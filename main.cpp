@@ -1,135 +1,56 @@
 #include <iostream>
 #include <string>
 #include <vector>
-bool isRunning = true;
-
-enum class OrderBookType
+#include "OrderBookEntry.h"
+#include "MerkelMain.h"
+double computeAveragePrice(std::vector<OrderBookEntry>& orders)
 {
-    bid,
-    ask
-};
-
-OrderBookType orderType = OrderBookType::bid;
-
-class OrderBookEntry
-{
-     public:
-        OrderBookEntry(double price
-                    , double amount
-                    , std::string timeStamp
-                    , std::string product
-                    , OrderBookType orderType)
-        : price(price)
-        , amount(amount)
-        , timeStamp(timeStamp)
-        , product(product)
-        , orderType(orderType)
-        {
-
-        }
-
-        double price;
-        double amount;
-        std::string timeStamp;
-        std::string product;
-        OrderBookType orderType;
-        
-};
-
-void printMenu()
-{
-
-        // 1 print help
-    std::cout << "1. Print Help" << std::endl;
-    // 2 print exchange stats
-    std::cout << "2. Print Exchange Stats" << std::endl;
-    // 3 make an offer
-    std::cout << "3. Make an Offer" << std::endl;
-    // 4 make a bid
-    std::cout << "4. Make a Bid" << std::endl;
-    // 5 print wallet
-    std::cout << "5. Print Wallet" << std::endl;
-    // 6 continue
-    std::cout << "6. Continue" << std::endl;
-    std::cout << "7.Exit Program" << std::endl;
-
-    std::cout << "Select an option: " << std::endl;
-    std::cout << "====================" << std::endl;
-
-}
-
-void printHelp()
-{
-    std::cout << "Help - your aim is to make money. Analyse the market and makes bids and offers" << std::endl;
-}
-void printMarketStats()
-{
-   std::cout << "Markets looks good" << std::endl;
-}
-void enterOffer()
-{
-    std::cout << "Make an offer - enter the amount" << std::endl;
-}
-void enterBid()
-{
-    std::cout << "Make a bid - enter the amount" << std::endl;
-}
-void printWallet()
-{
-    std::cout << "Your wallet is empty" << std::endl;
-}
-void goToNextTimeFrame()
-{
-    std::cout << "Going to next time frame" << std::endl;
-}
-int getUserOption(){
-    int userInput;
-    std::cout << "Type in 1-7" << std::endl;
-    std::cin >> userInput;
-    std:: cout << "You chose: " << userInput << std::endl;
-    return userInput;
-}
-void processUserOption(int option){
-    switch (option)
+    double totalPrice = 0.0;
+    for (OrderBookEntry order : orders)
     {
-        case 1:
-            printHelp();
-            break;
-        case 2:
-            printMarketStats();
-            break;
-        case 3:
-            enterOffer();
-            break;
-        case 4:
-            enterBid();
-            break;
-        case 5:
-            printWallet();
-            break;
-        case 6:
-            goToNextTimeFrame();
-            break;
-        case 7:
-            std::cout << "Exiting program." << std::endl;
-            isRunning = false;
-            break;
-        default:
-            std::cout << "Invalid choice. Choose 1-7." << std::endl;
-            break;
+        totalPrice += order.price;
     }
+    return totalPrice / orders.size();
+}
+double computeLowPrice(std::vector<OrderBookEntry>& orders)
+{
+    double lowPrice = orders[0].price;
+    for (OrderBookEntry order : orders)
+    {
+        if (order.price < lowPrice)
+        {
+            lowPrice = order.price;
+        }
+    }
+    return lowPrice;
 }
 
+double computeHighPrice(std::vector<OrderBookEntry>& orders)
+{
+    double highPrice = orders[0].price;
+    for (OrderBookEntry order : orders)
+    {
+        if (order.price > highPrice)
+        {
+            highPrice = order.price;
+        }
+    }
+    return highPrice;
+}
+
+double computePriceSpread(std::vector<OrderBookEntry>& orders)
+{
+    double lowPrice = computeLowPrice(orders);
+    double highPrice = computeHighPrice(orders);
+    return highPrice - lowPrice;
+}
 int main(){
 
-    //while(isRunning)
-    //{
-    //    printMenu();
-    //    int userOption = getUserOption();
-    //    processUserOption(userOption);
-    //}
+    
+    MerkelMain app{};
+    app.Init();
 
-    std::vector<OrderBookEntry> orders;
+    /*std::vector<OrderBookEntry> orders;
 
 
 
@@ -149,9 +70,14 @@ int main(){
         OrderBookType::bid
     });
 
+    std::cout << "Average price: " << computeAveragePrice(orders) << std::endl;
+    std::cout << "Low price: " << computeLowPrice(orders) << std::endl;
+    std::cout << "High price: " << computeHighPrice(orders) << std ::endl;
+    std::cout << "Price spread: " << computePriceSpread(orders) << std::endl;*/
+
     // Iterate over a vector
 
-    for (OrderBookEntry order : orders) //Works on the copy of the order, not the original order. If we want to change the original order, we need to use a reference.
+    /*for (OrderBookEntry order : orders) //Works on the copy of the order, not the original order. If we want to change the original order, we need to use a reference.
     {
         std::cout << "Order details: " << std::endl;
         std::cout << "Price: " << order.price << std::endl;
@@ -188,7 +114,7 @@ int main(){
         std::cout << "Amount: " << orders.at(i).amount << std::endl;
         std::cout << "Timestamp: " << orders.at(i).timeStamp << std::endl;
         std::cout << "Product: " << orders.at(i).product << std::endl;
-    }
+    } */
 
     return 0;
 }
