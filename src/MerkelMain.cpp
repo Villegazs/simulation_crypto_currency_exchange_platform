@@ -9,6 +9,7 @@ MerkelMain::MerkelMain()
 
 void MerkelMain::Init()
 {
+    loadOrderBook();
     while (MerkelMain::isRunning)
     {
         printMenu();
@@ -17,7 +18,24 @@ void MerkelMain::Init()
     }
     
 }
+void MerkelMain::loadOrderBook()
+{
+    orders.push_back(OrderBookEntry{
+        10000,
+        0.001,
+        "2020/03/17 17:01:24.884492",
+        "BTC/USD",
+        OrderBookType::bid
+    });
 
+        orders.push_back(OrderBookEntry{
+        20000,
+        0.002,
+        "2020/03/17 17:01:24.884492",
+        "BTC/USD",
+        OrderBookType::bid
+    });
+}
 void MerkelMain::printMenu()
 {
 
@@ -46,7 +64,7 @@ void MerkelMain::printHelp()
 }
 void MerkelMain::printMarketStats()
 {
-   std::cout << "Markets looks good" << std::endl;
+   std::cout << "Order Book contains "<< orders.size() << " entries" << std::endl;
 }
 void MerkelMain::enterOffer()
 {

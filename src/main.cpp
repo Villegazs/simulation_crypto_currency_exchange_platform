@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "OrderBookEntry.h"
 #include "MerkelMain.h"
 double computeAveragePrice(std::vector<OrderBookEntry>& orders)
 {
