@@ -43,11 +43,13 @@ double computePriceSpread(std::vector<OrderBookEntry>& orders)
     double highPrice = computeHighPrice(orders);
     return highPrice - lowPrice;
 }
-int main() {
 
 
-    MerkelMain app{};
-    app.Init();
+// int main() {
+
+
+    // MerkelMain app{};
+    // app.Init();
 
     /*std::vector<OrderBookEntry> orders;
 
@@ -72,11 +74,11 @@ int main() {
     std::cout << "Average price: " << computeAveragePrice(orders) << std::endl;
     std::cout << "Low price: " << computeLowPrice(orders) << std::endl;
     std::cout << "High price: " << computeHighPrice(orders) << std ::endl;
-    std::cout << "Price spread: " << computePriceSpread(orders) << std::endl;*/
+    std::cout << "Price spread: " << computePriceSpread(orders) << std::endl;
 
     // Iterate over a vector
 
-    /*for (OrderBookEntry order : orders) //Works on the copy of the order, not the original order. If we want to change the original order, we need to use a reference.
+    for (OrderBookEntry order : orders) //Works on the copy of the order, not the original order. If we want to change the original order, we need to use a reference.
     {
         std::cout << "Order details: " << std::endl;
         std::cout << "Price: " << order.price << std::endl;
@@ -115,5 +117,5 @@ int main() {
         std::cout << "Product: " << orders.at(i).product << std::endl;
     } */
 
-    return 0;
-}
+//    return 0;
+//}

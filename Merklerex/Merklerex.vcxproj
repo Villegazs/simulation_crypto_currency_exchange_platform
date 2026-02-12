@@ -130,6 +130,7 @@
     <ClCompile Include="MerkelMain.cpp" />
     <ClCompile Include="Merklerex.cpp" />
     <ClCompile Include="OrderBookEntry.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MerkelMain.h" />
