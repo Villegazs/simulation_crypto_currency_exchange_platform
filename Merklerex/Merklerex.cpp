@@ -43,9 +43,9 @@ double computePriceSpread(std::vector<OrderBookEntry>& orders)
     double highPrice = computeHighPrice(orders);
     return highPrice - lowPrice;
 }
-int main(){
+int main() {
 
-    
+
     MerkelMain app{};
     app.Init();
 

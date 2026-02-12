@@ -4,7 +4,7 @@
 
 MerkelMain::MerkelMain()
 {
-    
+
 }
 
 void MerkelMain::Init()
@@ -16,7 +16,7 @@ void MerkelMain::Init()
         int userOption = getUserOption();
         processUserOption(userOption);
     }
-    
+
 }
 void MerkelMain::loadOrderBook()
 {
@@ -26,20 +26,20 @@ void MerkelMain::loadOrderBook()
         "2020/03/17 17:01:24.884492",
         "BTC/USD",
         OrderBookType::bid
-    });
+        });
 
-        orders.push_back(OrderBookEntry{
-        20000,
-        0.002,
-        "2020/03/17 17:01:24.884492",
-        "BTC/USD",
-        OrderBookType::bid
-    });
+    orders.push_back(OrderBookEntry{
+    20000,
+    0.002,
+    "2020/03/17 17:01:24.884492",
+    "BTC/USD",
+    OrderBookType::bid
+        });
 }
 void MerkelMain::printMenu()
 {
 
-        // 1 print help
+    // 1 print help
     std::cout << "1. Print Help" << std::endl;
     // 2 print exchange stats
     std::cout << "2. Print Exchange Stats" << std::endl;
@@ -64,7 +64,7 @@ void MerkelMain::printHelp()
 }
 void MerkelMain::printMarketStats()
 {
-   std::cout << "Order Book contains "<< orders.size() << " entries" << std::endl;
+    std::cout << "Order Book contains " << orders.size() << " entries" << std::endl;
 }
 void MerkelMain::enterOffer()
 {
@@ -82,40 +82,40 @@ void MerkelMain::goToNextTimeFrame()
 {
     std::cout << "Going to next time frame" << std::endl;
 }
-int MerkelMain::getUserOption(){
+int MerkelMain::getUserOption() {
     int userInput;
     std::cout << "Type in 1-7" << std::endl;
     std::cin >> userInput;
-    std:: cout << "You chose: " << userInput << std::endl;
+    std::cout << "You chose: " << userInput << std::endl;
     return userInput;
 }
-void MerkelMain::processUserOption(int option){
+void MerkelMain::processUserOption(int option) {
     switch (option)
     {
-        case 1:
-            printHelp();
-            break;
-        case 2:
-            printMarketStats();
-            break;
-        case 3:
-            enterOffer();
-            break;
-        case 4:
-            enterBid();
-            break;
-        case 5:
-            printWallet();
-            break;
-        case 6:
-            goToNextTimeFrame();
-            break;
-        case 7:
-            std::cout << "Exiting program." << std::endl;
-            isRunning = false;
-            break;
-        default:
-            std::cout << "Invalid choice. Choose 1-7." << std::endl;
-            break;
+    case 1:
+        printHelp();
+        break;
+    case 2:
+        printMarketStats();
+        break;
+    case 3:
+        enterOffer();
+        break;
+    case 4:
+        enterBid();
+        break;
+    case 5:
+        printWallet();
+        break;
+    case 6:
+        goToNextTimeFrame();
+        break;
+    case 7:
+        std::cout << "Exiting program." << std::endl;
+        isRunning = false;
+        break;
+    default:
+        std::cout << "Invalid choice. Choose 1-7." << std::endl;
+        break;
     }
 }
