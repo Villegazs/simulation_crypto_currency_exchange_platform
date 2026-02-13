@@ -12,15 +12,16 @@ enum class OrderBookType
 class OrderBookEntry
 {
 public:
-    OrderBookEntry(double price
-        , double amount
-        , std::string timeStamp
+    OrderBookEntry(std::string timestamp
         , std::string product
-        , OrderBookType orderType);
+        , OrderBookType orderType
+        , double price
+        , double amount
+        );
 
-    double price;
-    double amount;
     std::string timeStamp;
     std::string product;
     OrderBookType orderType;
+    double price;
+    double amount;
 };

@@ -21,20 +21,19 @@ void MerkelMain::Init()
 void MerkelMain::loadOrderBook()
 {
     orders.push_back(OrderBookEntry{
-        10000,
-        0.001,
         "2020/03/17 17:01:24.884492",
         "BTC/USD",
-        OrderBookType::bid
+        OrderBookType::bid,
+        10000,
+        0.001,
         });
 
     orders.push_back(OrderBookEntry{
-    20000,
-    0.002,
     "2020/03/17 17:01:24.884492",
     "BTC/USD",
-    OrderBookType::bid
-        });
+    OrderBookType::bid,
+    20000,
+    0.002 });
 }
 void MerkelMain::printMenu()
 {
