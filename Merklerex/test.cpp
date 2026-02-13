@@ -34,7 +34,7 @@ std::vector<std::string> tokenise(std::string csvLine, char separator)
 
 		start = end + 1;
 
-	} while (end > 0); // loop until no more separators
+	} while (end != std::string::npos); // loop until no more separators
 	return tokens;
 }
 
@@ -65,10 +65,20 @@ int main()
 			std::string timestamp = tokens[0];
 			std::string product = tokens[1];
 			OrderBookType orderType = tokens[2] == "bid" ? OrderBookType::bid : OrderBookType::ask;
-			double price = std::stod(tokens[3]);
-			double amount = std::stod(tokens[4]);
 
-			std::cout << "Price: " << price << std::endl;
+
+			try {
+				double price = std::stod(tokens[3]);
+				double amount = std::stod(tokens[4]);
+				std::cout << "Price: " << price << std::endl;
+
+			} 
+			catch(const std::exception& e)
+			{
+				std::cout << "Bad float!: " << tokens[3] << std::endl;
+				std::cout << "Bad float!: " << tokens[4] << std::endl;
+				break;
+			}
 		}
 
 		csvFile.close();
