@@ -1,8 +1,8 @@
 #include <iostream>
-#include "BitcoinMain.h"
+#include "GoldMain.h"
 int main()
 {
-    BitcoinMain app;
+    GoldMain app;
     app.Init();
     return 0;
 }
