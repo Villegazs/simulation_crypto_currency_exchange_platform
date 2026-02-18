@@ -2,7 +2,24 @@
 #include <string>
 #include <vector>
 #include "MerkelMain.h"
-double computeAveragePrice(std::vector<OrderBookEntry>& orders)
+#include "CSVReader.h"
+
+
+
+int main() {
+
+
+    //MerkelMain app{};
+    //app.Init();
+
+	CSVReader::readCSV("20200317.csv");
+    return 0;
+}
+
+
+// The following code is for testing purposes only. It is not part of the main program. It is used to test the functions that compute the average price, low price, high price and price spread. It is also used to test the iteration over a vector of OrderBookEntry objects. It is commented out because it is not part of the main program. It can be uncommented for testing purposes only.
+
+/*double computeAveragePrice(std::vector<OrderBookEntry>& orders)
 {
     double totalPrice = 0.0;
     for (OrderBookEntry order : orders)
@@ -43,15 +60,9 @@ double computePriceSpread(std::vector<OrderBookEntry>& orders)
     double highPrice = computeHighPrice(orders);
     return highPrice - lowPrice;
 }
+*/
 
-
-// int main() {
-
-
-    // MerkelMain app{};
-    // app.Init();
-
-    /*std::vector<OrderBookEntry> orders;
+/*std::vector<OrderBookEntry> orders;
 
 
 
@@ -116,6 +127,3 @@ double computePriceSpread(std::vector<OrderBookEntry>& orders)
         std::cout << "Timestamp: " << orders.at(i).timeStamp << std::endl;
         std::cout << "Product: " << orders.at(i).product << std::endl;
     } */
-
-//    return 0;
-//}

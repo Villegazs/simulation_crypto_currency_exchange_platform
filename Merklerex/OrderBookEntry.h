@@ -19,6 +19,8 @@ public:
         , double amount
         );
 
+	static OrderBookType stringToOrderBookType(std::string type);
+
     std::string timeStamp;
     std::string product;
     OrderBookType orderType;
