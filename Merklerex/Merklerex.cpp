@@ -2,17 +2,15 @@
 #include <string>
 #include <vector>
 #include "MerkelMain.h"
-#include "CSVReader.h"
 
 
 
 int main() {
 
 
-    //MerkelMain app{};
-    //app.Init();
+    MerkelMain app{};
+    app.Init();
 
-	CSVReader::readCSV("20200317.csv");
     return 0;
 }
 
