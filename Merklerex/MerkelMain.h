@@ -2,6 +2,8 @@
 
 #include <vector>
 #include "OrderBookEntry.h"
+#include "OrderBook.h"
+
 class MerkelMain
 {
 public:
@@ -20,5 +22,7 @@ private:
     int getUserOption();
     void processUserOption(int option);
     bool isRunning = true;
-    std::vector<OrderBookEntry> orders;
+
+    OrderBook orderBook{"20200317.csv"};
+
 };

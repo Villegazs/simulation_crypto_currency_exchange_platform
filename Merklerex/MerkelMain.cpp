@@ -10,7 +10,6 @@ MerkelMain::MerkelMain()
 
 void MerkelMain::Init()
 {
-    loadOrderBook();
     while (MerkelMain::isRunning)
     {
         printMenu();
@@ -19,10 +18,7 @@ void MerkelMain::Init()
     }
 
 }
-void MerkelMain::loadOrderBook()
-{
-   orders = CSVReader::readCSV("20200317.csv");
-}
+
 void MerkelMain::printMenu()
 {
 
@@ -51,7 +47,7 @@ void MerkelMain::printHelp()
 }
 void MerkelMain::printMarketStats()
 {
-    std::cout << "Order Book contains " << orders.size() << " entries" << std::endl;
+   /* std::cout << "Order Book contains " << orders.size() << " entries" << std::endl;
 
 	unsigned int asksCount = 0;
 	unsigned int bidsCount = 0;
@@ -69,6 +65,7 @@ void MerkelMain::printMarketStats()
 	}
 
 	std::cout << "Orderbook Asks: " << asksCount << " bids: " << bidsCount << std::endl;
+    */
 }
 void MerkelMain::enterOffer()
 {

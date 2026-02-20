@@ -7,13 +7,16 @@
 
 class OrderBook
 {
-public:
-	/*Construct reading a csv data file*/
-	OrderBook(std::string csvFileName);
-	/*Return vector of all known products in dataset*/
-	std::vector<std::string> getKnownProducts();
-	/*Return vector of all orders for a given product and timestamp*/
-	std::vector<OrderBookEntry> getOrders(OrderBookType type, 
-										std::string product, 
-										std::string timestamp);
+	public:
+		/*Construct reading a csv data file*/
+		OrderBook(std::string csvFileName);
+		/*Return vector of all known products in dataset*/
+		std::vector<std::string> getKnownProducts();
+		/*Return vector of all orders for a given product and timestamp*/
+		std::vector<OrderBookEntry> getOrders(OrderBookType type, 
+											std::string product, 
+											std::string timestamp);
+
+	private:
+		std::vector<OrderBookEntry> orders;
 };

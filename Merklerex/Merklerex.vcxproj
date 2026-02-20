@@ -130,12 +130,14 @@
     <ClCompile Include="CSVReader.cpp" />
     <ClCompile Include="MerkelMain.cpp" />
     <ClCompile Include="Merklerex.cpp" />
+    <ClCompile Include="OrderBook.cpp" />
     <ClCompile Include="OrderBookEntry.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSVReader.h" />
     <ClInclude Include="MerkelMain.h" />
+    <ClInclude Include="OrderBook.h" />
     <ClInclude Include="OrderBookEntry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
