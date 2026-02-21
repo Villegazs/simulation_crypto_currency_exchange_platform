@@ -47,6 +47,11 @@ void MerkelMain::printHelp()
 }
 void MerkelMain::printMarketStats()
 {
+
+    for(std::string const p: orderBook.getKnownProducts())
+    {
+        std::cout << "Product: " << p << std::endl;
+	}
    /* std::cout << "Order Book contains " << orders.size() << " entries" << std::endl;
 
 	unsigned int asksCount = 0;
