@@ -23,6 +23,8 @@ private:
     void processUserOption(int option);
     bool isRunning = true;
 
+    std::string currentTime;
+
     OrderBook orderBook{"20200317.csv"};
 
 };

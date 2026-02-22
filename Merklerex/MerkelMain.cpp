@@ -10,6 +10,7 @@ MerkelMain::MerkelMain()
 
 void MerkelMain::Init()
 {
+	currentTime = orderBook.getEarliestTime();
     while (MerkelMain::isRunning)
     {
         printMenu();
@@ -38,6 +39,8 @@ void MerkelMain::printMenu()
 
     std::cout << "Select an option: " << std::endl;
     std::cout << "====================" << std::endl;
+
+	std::cout << "Current time: " << currentTime << std::endl;
 
 }
 
