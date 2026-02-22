@@ -79,3 +79,22 @@ std::string OrderBook::getEarliestTime()
 	return orders[0].timeStamp;
 }
 
+std::string OrderBook::getNextTime(std::string timestamp)
+{
+	std::string nextTimestamp = "";
+	for(OrderBookEntry& order : orders)
+	{
+		if (order.timeStamp > timestamp)
+		{
+			nextTimestamp = order.timeStamp;
+			break;
+		}
+	}
+	if(nextTimestamp == "")
+	{
+		nextTimestamp = orders[0].timeStamp; // loop back to the start of the order book if we have reached the end
+	}
+	return nextTimestamp;
+}
+
+
