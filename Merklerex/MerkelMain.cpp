@@ -50,6 +50,9 @@ void MerkelMain::printHelp()
 }
 void MerkelMain::printMarketStats()
 {
+    const std::string RESET = "\033[0m";
+    const std::string RED = "\033[31m";
+    const std::string GREEN = "\033[32m";
 
     for(std::string const p: orderBook.getKnownProducts())
     {
@@ -58,12 +61,25 @@ void MerkelMain::printMarketStats()
 		std::vector<OrderBookEntry> asks = orderBook.getOrders
         (OrderBookType::ask, 
             p, 
-            "2020/03/17 17:01:24.884492");
+            currentTime);
 
 		std::cout << "Asks: " << asks.size() << std::endl;
+		if (asks.size() == 0) continue;
 
 		std::cout << "Highest ask: " << OrderBook::getHighPrice(asks) << std::endl;
 		std::cout << "Lowest ask: " << OrderBook::getLowPrice(asks) << std::endl;
+		std::cout << "Mean ask: " << OrderBook::getMeanPrice(asks) << std::endl;
+		std::string priceChangeColour = GREEN;
+        if(orderBook.getPercentagePriceValueChange(asks) == 0)
+        {
+			std::cout<< priceChangeColour<<"No ask price change" << RESET<<std::endl;
+			continue;
+		}
+		else if (orderBook.getPercentagePriceValueChange(asks) < 0)
+        {
+			priceChangeColour = RED;
+        }
+		std::cout << "Ask price change: " << priceChangeColour <<orderBook.getPercentagePriceValueChange(asks) <<"%"<< RESET << std::endl;
 	}
    /* std::cout << "Order Book contains " << orders.size() << " entries" << std::endl;
 

@@ -2,7 +2,6 @@
 #include <map>
 
 
-
 OrderBook::OrderBook(std::string csvFileName) {
 	orders = CSVReader::readCSV(csvFileName);
 }
@@ -74,6 +73,40 @@ double OrderBook::getLowPrice(std::vector<OrderBookEntry>& orders)
 	return min;
 }
 
+double OrderBook::getMeanPrice(std::vector<OrderBookEntry>& orders)
+{
+	double total = 0.0;
+	for (OrderBookEntry order : orders)
+	{
+		total += order.price;
+	}
+
+	return total / orders.size();
+}
+
+double OrderBook::getPercentagePriceValueChange(std::vector<OrderBookEntry>& orders)
+{
+	if(previousTime == "")
+	{
+		return 0.0; // no previous timestamp, so we cannot calculate a price change
+	}
+	double priceChange = 0.0;
+	double priceAtTime = 0.0;
+	double priceAtPreviousTime = 0.0;
+
+	priceAtTime = OrderBook::getMeanPrice(orders);
+
+	std::vector<OrderBookEntry> previousOrders;
+	previousOrders = this->OrderBook::getOrders(orders[0].orderType, orders[0].product, previousTime);
+	priceAtPreviousTime = OrderBook::getMeanPrice(previousOrders);
+
+	priceChange = (priceAtTime - priceAtPreviousTime);
+	double priceChangePercentage = (priceChange / priceAtPreviousTime) * 100.0;
+
+	return priceChangePercentage;
+
+}
+
 std::string OrderBook::getEarliestTime()
 {
 	return orders[0].timeStamp;
@@ -81,6 +114,7 @@ std::string OrderBook::getEarliestTime()
 
 std::string OrderBook::getNextTime(std::string timestamp)
 {
+	previousTime = timestamp; // store the current timestamp as the previous timestamp for the next time we calculate the price change
 	std::string nextTimestamp = "";
 	for(OrderBookEntry& order : orders)
 	{
@@ -92,6 +126,7 @@ std::string OrderBook::getNextTime(std::string timestamp)
 	}
 	if(nextTimestamp == "")
 	{
+		previousTime = ""; // reset the previous time when we loop back to the start of the order book
 		nextTimestamp = orders[0].timeStamp; // loop back to the start of the order book if we have reached the end
 	}
 	return nextTimestamp;
