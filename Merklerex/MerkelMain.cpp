@@ -28,7 +28,7 @@ void MerkelMain::printMenu()
     // 2 print exchange stats
     std::cout << "2. Print Exchange Stats" << std::endl;
     // 3 make an offer
-    std::cout << "3. Make an Offer" << std::endl;
+    std::cout << "3. Make an Ask" << std::endl;
     // 4 make a bid
     std::cout << "4. Make a Bid" << std::endl;
     // 5 print wallet
@@ -101,9 +101,13 @@ void MerkelMain::printMarketStats()
 	std::cout << "Orderbook Asks: " << asksCount << " bids: " << bidsCount << std::endl;
     */
 }
-void MerkelMain::enterOffer()
+void MerkelMain::enterAsk()
 {
-    std::cout << "Make an offer - enter the amount" << std::endl;
+    std::cout << "Make an ask - enter the amount: product, price, amount. eg ETH/BTC,200,0.5" << std::endl;
+	std::string input;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::getline(std::cin, input);
+	std::cout << "You entered: " << input << std::endl;
 }
 void MerkelMain::enterBid()
 {
@@ -135,7 +139,7 @@ void MerkelMain::processUserOption(int option) {
         printMarketStats();
         break;
     case 3:
-        enterOffer();
+        enterAsk();
         break;
     case 4:
         enterBid();
