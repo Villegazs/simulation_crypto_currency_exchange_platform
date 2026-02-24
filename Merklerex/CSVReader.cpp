@@ -102,7 +102,7 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
 	}
 	catch (const std::exception& e)
 	{
-		std::cout << "Bad float!: " << tokens.at(3) << " or " << tokens.at(4) << std::endl;
+		std::cout << "CSVReader::stringsToOBE:Bad float!: " << tokens.at(3) << " or " << tokens.at(4) << std::endl;
 		throw; // rethrow the exception to be handled by the caller
 	}
 	OrderBookEntry entry(timestamp,product,
@@ -110,4 +110,24 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
 
 	return entry;
 
+}
+
+OrderBookEntry CSVReader::stringsToOBE(std::string timestamp,
+	std::string product,
+	OrderBookType orderBookType, 
+	std::string price,
+	std::string amount)
+{
+	double priceDouble, amountDouble;
+	try {
+		priceDouble = std::stod(price);
+		amountDouble = std::stod(amount);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "CSVReader::stringsToOBE: Bad float!: " << price << " or " << amount << std::endl;
+		throw; // rethrow the exception to be handled by the caller
+	}
+	OrderBookEntry entry(timestamp, product, orderBookType, priceDouble, amountDouble);
+	return entry;
 }
