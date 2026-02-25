@@ -105,7 +105,6 @@ void MerkelMain::enterAsk()
 {
     std::cout << "Make an ask - enter the amount: product, price, amount. eg ETH/BTC,200,0.5" << std::endl;
 	std::string input;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::getline(std::cin, input);
 	std::vector<std::string> tokens = CSVReader::tokenise(input, ',');
     if(tokens.size() != 3)
@@ -115,12 +114,19 @@ void MerkelMain::enterAsk()
 	}
     else
     {
-		OrderBookEntry order = CSVReader::stringsToOBE(
-        currentTime,
-        tokens[0],
-        OrderBookType::ask,
-        tokens[1],
-        tokens[2]);
+        try
+        {
+            OrderBookEntry order = CSVReader::stringsToOBE(
+                currentTime,
+                tokens[0],
+                OrderBookType::ask,
+                tokens[1],
+                tokens[2]);
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << "MerkelMain::enterAsk: Invalid input." << std::endl;
+        }
     }
 
 	std::cout << "You entered: " << input << std::endl;
@@ -139,9 +145,20 @@ void MerkelMain::goToNextTimeFrame()
 	currentTime = orderBook.getNextTime(currentTime);
 }
 int MerkelMain::getUserOption() {
-    int userInput;
+    int userInput = 0;
+    std::string line;
     std::cout << "Type in 1-7" << std::endl;
-    std::cin >> userInput;
+	std::getline(std::cin, line);
+    try {
+        userInput = std::stoi(line);
+
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Invalid input. Please enter a number between 1 and 7." << std::endl;
+		printMenu();
+        return getUserOption();
+	}
     std::cout << "You chose: " << userInput << std::endl;
     return userInput;
 }
