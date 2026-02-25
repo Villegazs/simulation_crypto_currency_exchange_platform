@@ -1,5 +1,6 @@
 #include "OrderBook.h"
 #include <map>
+#include <algorithm>
 
 
 OrderBook::OrderBook(std::string csvFileName) {
@@ -132,4 +133,9 @@ std::string OrderBook::getNextTime(std::string timestamp)
 	return nextTimestamp;
 }
 
+void OrderBook::insertOrder(OrderBookEntry& order)
+{
+	orders.push_back(order);
+	std::sort(orders.begin(), orders.end(), OrderBookEntry::compareByTimestamp);
+}
 

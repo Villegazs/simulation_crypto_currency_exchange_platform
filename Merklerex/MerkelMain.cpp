@@ -122,6 +122,7 @@ void MerkelMain::enterAsk()
                 OrderBookType::ask,
                 tokens[1],
                 tokens[2]);
+			orderBook.insertOrder(order);
         }
         catch (const std::exception& e)
         {
@@ -155,9 +156,7 @@ int MerkelMain::getUserOption() {
     }
     catch (const std::exception& e)
     {
-        std::cout << "Invalid input. Please enter a number between 1 and 7." << std::endl;
-		printMenu();
-        return getUserOption();
+
 	}
     std::cout << "You chose: " << userInput << std::endl;
     return userInput;

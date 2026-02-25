@@ -33,3 +33,8 @@ OrderBookType OrderBookEntry::stringToOrderBookType(std::string type)
         throw std::exception{};
     }
 }
+
+bool OrderBookEntry::compareByTimestamp(OrderBookEntry& e1, OrderBookEntry& e2)
+{
+	return e1.timeStamp < e2.timeStamp;
+}

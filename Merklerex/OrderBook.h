@@ -23,6 +23,8 @@ class OrderBook
 		If there is no next timestamp, wrap around to the start*/
 		std::string getNextTime(std::string timestamp);
 
+		void insertOrder(OrderBookEntry& order);
+
 		static double getHighPrice(std::vector<OrderBookEntry>& orders);
 		static double getLowPrice(std::vector<OrderBookEntry>& orders);
 		/* Returns the mean price of the orders in the vector. 
