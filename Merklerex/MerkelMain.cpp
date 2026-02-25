@@ -134,7 +134,32 @@ void MerkelMain::enterAsk()
 }
 void MerkelMain::enterBid()
 {
-    std::cout << "Make a bid - enter the amount" << std::endl;
+    std::cout << "Make a bid - enter the amount: product, price, amount. eg ETH/BTC,200,0.5" << std::endl;
+	std::string input;
+	std::getline(std::cin, input);
+    std::vector<std::string> tokens = CSVReader::tokenise(input, ',');
+    if(tokens.size() != 3)
+    {
+        std::cout << "Invalid input. Please enter in the format: product, price, amount" << std::endl;
+        return;
+    }
+    else
+    {
+        try
+        {
+            OrderBookEntry order = CSVReader::stringsToOBE(
+                currentTime,
+                tokens[0],
+                OrderBookType::bid,
+                tokens[1],
+                tokens[2]);
+            orderBook.insertOrder(order);
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << "MerkelMain::enterBid: Invalid input." << std::endl;
+        }
+	}
 }
 void MerkelMain::printWallet()
 {
