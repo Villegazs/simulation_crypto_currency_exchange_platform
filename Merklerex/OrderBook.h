@@ -25,6 +25,8 @@ class OrderBook
 
 		void insertOrder(OrderBookEntry& order);
 
+		std::vector<OrderBookEntry> matchAsksToBids(std::string product, std::string timeStamp);
+
 		static double getHighPrice(std::vector<OrderBookEntry>& orders);
 		static double getLowPrice(std::vector<OrderBookEntry>& orders);
 		/* Returns the mean price of the orders in the vector. 

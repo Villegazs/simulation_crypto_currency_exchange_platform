@@ -5,7 +5,8 @@
 enum class OrderBookType
 {
     bid,
-    ask
+    ask,
+    sale
 };
 
 
@@ -22,6 +23,8 @@ public:
 	static OrderBookType stringToOrderBookType(std::string type);
 
 	static bool compareByTimestamp(OrderBookEntry& e1, OrderBookEntry& e2);
+    static bool compareByPriceAsc(OrderBookEntry& e1, OrderBookEntry& e2);
+    static bool compareByPriceDesc(OrderBookEntry& e1, OrderBookEntry& e2);
 
     std::string timeStamp;
     std::string product;

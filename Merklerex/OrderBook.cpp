@@ -139,3 +139,57 @@ void OrderBook::insertOrder(OrderBookEntry& order)
 	std::sort(orders.begin(), orders.end(), OrderBookEntry::compareByTimestamp);
 }
 
+std::vector<OrderBookEntry> OrderBook::matchAsksToBids(std::string product, std::string timeStamp)
+{
+	std::vector<OrderBookEntry> asks = getOrders(OrderBookType::ask, product, timeStamp);
+
+	std::vector<OrderBookEntry> bids = getOrders(OrderBookType::bid, product, timeStamp);
+
+	std::vector<OrderBookEntry> sales; // we will store the sales that we create in this vector and return it at the end of the function
+
+	std::sort(asks.begin(), asks.end(), OrderBookEntry::compareByPriceAsc); // sort the asks in ascending order of price, so that we match the lowest ask price first
+	std::sort(bids.begin(), bids.end(), OrderBookEntry::compareByPriceDesc); // sort the bids in descending order of price, so that we match the highest bid price first
+
+	for (OrderBookEntry& ask : asks)
+	{
+		for (OrderBookEntry& bid : bids)
+		{
+			if (bid.price >= ask.price)
+			{
+				OrderBookEntry sale{
+										timeStamp,
+										product,
+										OrderBookType::sale, // we can use either bid or ask here, as the order type is not relevant for a sale
+										ask.price, // the sale price is the ask price
+										0.0 // we will calculate the sale amount below
+				};
+
+				if (bid.amount == ask.amount)
+				{
+					sale.amount = ask.amount; // the sale amount is the same as the ask amount (or the bid amount, since they are the same)
+					sales.push_back(sale); // add the sale to the sales vector
+					bid.amount = 0.0; // set the bid amount to 0, as it has been fully matched
+					break; // move on to the next ask, as this ask has been fully matched
+				}
+					
+				if (bid.amount > ask.amount)
+				{
+					sale.amount = ask.amount; // the sale amount is the same as the ask amount, as the bid has more than enough to fully match the ask
+					sales.push_back(sale); // add the sale to the sales vector
+					bid.amount -= ask.amount; // reduce the bid amount by the amount that was matched with the ask
+					break; // move on to the next ask, as this ask has been fully matched
+				}
+
+				if (bid.amount < ask.amount)
+				{
+					sale.amount = bid.amount; // the sale amount is the same as the bid amount, as the ask has more than enough to fully match the bid
+					sales.push_back(sale); // add the sale to the sales vector
+					ask.amount -= bid.amount; // reduce the ask amount by the amount that was matched with the bid
+					continue; // continue trying to match the remaining amount of the ask with the next bid
+				}
+			}
+		}
+	}
+
+	return sales;
+}
