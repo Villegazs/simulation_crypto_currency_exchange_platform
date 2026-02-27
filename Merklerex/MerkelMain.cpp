@@ -50,10 +50,6 @@ void MerkelMain::printHelp()
 }
 void MerkelMain::printMarketStats()
 {
-    const std::string RESET = "\033[0m";
-    const std::string RED = "\033[31m";
-    const std::string GREEN = "\033[32m";
-
     for(std::string const p: orderBook.getKnownProducts())
     {
         std::cout << "Product: " << p << std::endl;
@@ -64,22 +60,21 @@ void MerkelMain::printMarketStats()
             currentTime);
 
 		std::cout << "Asks: " << asks.size() << std::endl;
-		if (asks.size() == 0) continue;
-
-		std::cout << "Highest ask: " << OrderBook::getHighPrice(asks) << std::endl;
-		std::cout << "Lowest ask: " << OrderBook::getLowPrice(asks) << std::endl;
-		std::cout << "Mean ask: " << OrderBook::getMeanPrice(asks) << std::endl;
-		std::string priceChangeColour = GREEN;
-        if(orderBook.getPercentagePriceValueChange(asks) == 0)
+        if (asks.size() > 0)
         {
-			std::cout<< priceChangeColour<<"No ask price change" << RESET<<std::endl;
-			continue;
-		}
-		else if (orderBook.getPercentagePriceValueChange(asks) < 0)
-        {
-			priceChangeColour = RED;
+            calculateStatsForProduct(asks);
         }
-		std::cout << "Ask price change: " << priceChangeColour <<orderBook.getPercentagePriceValueChange(asks) <<"%"<< RESET << std::endl;
+        
+        std::vector<OrderBookEntry> bids = orderBook.getOrders
+        (OrderBookType::bid,
+            p,
+            currentTime);
+
+		std::cout << "Bids: " << bids.size() << std::endl;
+        if (bids.size() > 0)
+        {
+            calculateStatsForProduct(bids);
+        }
 	}
    /* std::cout << "Order Book contains " << orders.size() << " entries" << std::endl;
 
@@ -100,6 +95,32 @@ void MerkelMain::printMarketStats()
 
 	std::cout << "Orderbook Asks: " << asksCount << " bids: " << bidsCount << std::endl;
     */
+}
+
+void MerkelMain::calculateStatsForProduct(std::vector<OrderBookEntry> orders)
+{
+    const std::string RESET = "\033[0m";
+    const std::string RED = "\033[31m";
+    const std::string GREEN = "\033[32m";
+
+    std::string typeStr = (orders[0].orderType == OrderBookType::ask) ? "ask" : "bid";
+
+    std::cout << "Highest " << typeStr << ":" << OrderBook::getHighPrice(orders) << std::endl;
+    std::cout << "Lowest " << typeStr << ":" << OrderBook::getLowPrice(orders) << std::endl;
+    std::cout << "Mean " << typeStr << ":" << OrderBook::getMeanPrice(orders) << std::endl;
+    std::string priceChangeColour = GREEN;
+    if (orderBook.getPercentagePriceValueChange(orders) == 0)
+    {
+        std::cout << priceChangeColour << "No "<< typeStr << " price change" << RESET << std::endl;
+    }
+    else if (orderBook.getPercentagePriceValueChange(orders) < 0)
+    {
+        priceChangeColour = RED;
+    }
+	else if (orderBook.getPercentagePriceValueChange(orders) > 0)
+    {
+        std::cout << typeStr << " price change: " << priceChangeColour << orderBook.getPercentagePriceValueChange(orders) << "%" << RESET << std::endl;
+    }
 }
 void MerkelMain::enterAsk()
 {
@@ -168,12 +189,16 @@ void MerkelMain::printWallet()
 void MerkelMain::goToNextTimeFrame()
 {
     std::cout << "Going to next time frame" << std::endl;
-	std::vector<OrderBookEntry> sales = orderBook.matchAsksToBids("ETH/BTC", currentTime);
-	std::cout << "Sales: " << sales.size() << std::endl;
-    for (OrderBookEntry sale : sales)
+    for(std::string const product: orderBook.getKnownProducts())
     {
-		std::cout << "Sale: " << sale.product << " price: " << sale.price << " amount: " << sale.amount << std::endl;
-    }
+        std::cout << "matching" << product << std::endl;
+        std::vector<OrderBookEntry> sales = orderBook.matchAsksToBids(product, currentTime);
+        std::cout << "Sales: " << sales.size() << std::endl;
+        for (OrderBookEntry sale : sales)
+        {
+            std::cout << "Sale: " << sale.product << " price: " << sale.price << " amount: " << sale.amount << std::endl;
+        }
+	}
 	currentTime = orderBook.getNextTime(currentTime);
 }
 int MerkelMain::getUserOption() {

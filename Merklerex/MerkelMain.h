@@ -15,6 +15,7 @@ private:
     void printMenu();
     void printHelp();
     void printMarketStats();
+	void calculateStatsForProduct(std::vector<OrderBookEntry> orders);
     void enterAsk();
     void enterBid();
     void printWallet();
