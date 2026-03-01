@@ -2,14 +2,23 @@
 #include <string>
 #include <vector>
 #include "MerkelMain.h"
+#include "Wallet.h"
 
 
 
 int main() {
 
 
-    MerkelMain app{};
-    app.Init();
+   //MerkelMain app{};
+   // app.Init();
+	Wallet wallet{};
+
+	wallet.insertCurrency("BTC", 10);
+	wallet.insertCurrency("USDT", 10000);
+	std::cout << "Wallet has: " << wallet.containsCurrency("USDT", 10) << std::endl;
+	std::cout << wallet.toString() << std::endl;
+	wallet.removeCurrency("USDT", 1000);
+	std::cout << wallet.toString() << std::endl;
 
     return 0;
 }

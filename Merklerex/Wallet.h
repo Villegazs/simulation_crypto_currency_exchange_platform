@@ -8,6 +8,8 @@ class Wallet
 		Wallet();
 		/*Insert currency on the wallet*/
 		void insertCurrency(std::string currency, double amount);
+		/*remove currency of the wallet*/
+		bool removeCurrency(std::string currency, double amount);
 		/*Check if the wallet contains this much currency or more*/
 		bool containsCurrency(std::string currency, double amount);
 		/*Generate a string representation of the wallet*/
