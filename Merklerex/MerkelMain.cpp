@@ -146,8 +146,17 @@ void MerkelMain::enterAsk()
                 OrderBookType::ask,
                 tokens[1],
                 tokens[2]);
-			orderBook.insertOrder(order);
+            if (wallet.canFulfillOrder(order))
+            {
+                orderBook.insertOrder(order);
+                std::cout << "Wallet looks good." << std::endl;
+            }
+            else
+            {
+                std::cout << "Wallet has insufficient funds." << std::endl;
+            }
         }
+
         catch (const std::exception& e)
         {
             std::cout << "MerkelMain::enterAsk: Invalid input." << std::endl;
