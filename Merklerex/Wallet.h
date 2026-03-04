@@ -17,6 +17,8 @@ class Wallet
 		bool canFulfillOrder(OrderBookEntry order);
 		/*Generate a string representation of the wallet*/
 		std::string toString();
+		/*Overload the << operator to print the wallet*/
+		friend std::ostream& operator<<(std::ostream& os, Wallet& wallet);
 	private:
 		std::map<std::string, double> currencies; // map of currency to amount
 

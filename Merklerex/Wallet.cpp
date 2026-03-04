@@ -16,6 +16,7 @@ void Wallet::insertCurrency(std::string currency, double amount)
 	}
 	if (currencies.count(currency) == 0) // not there yet
 	{
+		currencies[currency] = 0.0; // initialize the currency in the wallet with a balance of 0
 		balance = 0;
 	}
 	else // is there
@@ -91,3 +92,10 @@ bool Wallet::canFulfillOrder(OrderBookEntry order)
 		return containsCurrency(currency, amount);
 	}
 }
+
+std::ostream& operator<<(std::ostream& os, Wallet& wallet)
+{
+	os << wallet.toString();
+	return os;
+}
+

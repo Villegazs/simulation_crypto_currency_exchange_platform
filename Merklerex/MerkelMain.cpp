@@ -173,7 +173,7 @@ void MerkelMain::enterBid()
     std::vector<std::string> tokens = CSVReader::tokenise(input, ',');
     if(tokens.size() != 3)
     {
-        std::cout << "Invalid input. Please enter in the format: product, price, amount" << std::endl;
+        std::cout << "MerkelMain::enterBid: Invalid input. Please enter in the format: product, price, amount" << std::endl;
         return;
     }
     else
@@ -186,7 +186,16 @@ void MerkelMain::enterBid()
                 OrderBookType::bid,
                 tokens[1],
                 tokens[2]);
-            orderBook.insertOrder(order);
+            
+            if (wallet.canFulfillOrder(order))
+            {
+                orderBook.insertOrder(order);
+                std::cout << "Wallet looks good." << std::endl;
+            }
+            else
+            {
+                std::cout << "Wallet has insufficient funds." << std::endl;
+            }
         }
         catch (const std::exception& e)
         {
@@ -196,8 +205,7 @@ void MerkelMain::enterBid()
 }
 void MerkelMain::printWallet()
 {
-    std::cout << "Your wallet is empty" << std::endl;
-	std::cout << wallet.toString() << std::endl;
+	std::cout << wallet << std::endl;
 }
 void MerkelMain::goToNextTimeFrame()
 {
