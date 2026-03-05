@@ -6,12 +6,14 @@ OrderBookEntry::OrderBookEntry(
     , std::string product
     , OrderBookType orderType
     , double price
-    , double amount)
+    , double amount
+    , std::string username)
     : timeStamp(timeStamp)
     , product(product)
     , orderType(orderType)
     , price(price)
     , amount(amount)
+	, username(username)
 
 {
 

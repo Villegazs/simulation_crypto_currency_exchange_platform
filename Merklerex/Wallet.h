@@ -15,6 +15,9 @@ class Wallet
 		bool containsCurrency(std::string currency, double amount);
 		/*Check if the wallet can cope with this ask or bid*/
 		bool canFulfillOrder(OrderBookEntry order);
+		/*udate the contents of the wallet
+		assumes the order was made by the owner of the wallet*/
+		void processSale(OrderBookEntry& sale);
 		/*Generate a string representation of the wallet*/
 		std::string toString();
 		/*Overload the << operator to print the wallet*/
