@@ -2,7 +2,7 @@
 
 A C++ console-based simulation of a cryptocurrency exchange trading platform that allows users to analyze market data, place bids and asks, and track their wallet balance.
 
-## ?? Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -15,7 +15,7 @@ A C++ console-based simulation of a cryptocurrency exchange trading platform tha
 - [Data Format](#data-format)
 - [Future Enhancements](#future-enhancements)
 
-## ?? Overview
+##  Overview
 
 Merklerex is a cryptocurrency exchange simulator that processes historical market data from CSV files and provides an interactive command-line interface for users to:
 - View real-time market statistics
@@ -24,7 +24,7 @@ Merklerex is a cryptocurrency exchange simulator that processes historical marke
 - Manage a virtual wallet
 - Simulate order matching between buyers and sellers
 
-## ? Features
+##  Features
 
 - **Market Analysis**
   - Real-time statistics for multiple cryptocurrency pairs
@@ -49,7 +49,7 @@ Merklerex is a cryptocurrency exchange simulator that processes historical marke
   - View market state at each time frame
   - Automatic wrapping to beginning when reaching the end
 
-## ?? Project Structure
+##  Project Structure
 
 ```
 Merklerex/
@@ -101,7 +101,7 @@ Utility class for:
 - Converting string data to OrderBookEntry objects
 - Input validation
 
-## ?? Technologies
+##  Technologies
 
 - **Language:** C++14
 - **Build System:** Visual Studio 2022 (MSVC 14.44)
@@ -111,7 +111,7 @@ Utility class for:
   - Exception handling
   - ANSI color codes for terminal output
 
-## ?? Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -146,7 +146,7 @@ cd Merklerex
 .\x64\Debug\Merklerex.exe
 ```
 
-## ?? Usage
+##  Usage
 
 ### Main Menu Options
 
@@ -186,7 +186,7 @@ The application displays:
   - ?? Green: Positive price change
   - ?? Red: Negative price change
 
-## ?? Implementation Details
+##  Implementation Details
 
 ### Order Matching Algorithm
 
@@ -251,7 +251,7 @@ bool canTrade = wallet.containsCurrency("USDT", 100);
 wallet.removeCurrency("USDT", 50);
 ```
 
-## ?? Data Format
+##  Data Format
 
 ### OrderBookEntry Structure
 
@@ -263,7 +263,7 @@ wallet.removeCurrency("USDT", 50);
 | price | double | Order price |
 | amount | double | Order quantity |
 
-## ?? Future Enhancements
+##  Future Enhancements
 
 - [ ] Persistent wallet state across sessions
 - [ ] Advanced order types (limit, stop-loss, market)
@@ -276,28 +276,28 @@ wallet.removeCurrency("USDT", 50);
 - [ ] Transaction history logging
 - [ ] Risk management features
 
-## ?? Notes
+##  Notes
 
 - The application uses ANSI escape codes for colored terminal output
 - Order matching occurs only when advancing the time frame
 - The simulation wraps around to the beginning when reaching the last timestamp
 - All monetary values are stored as double precision floating-point numbers
 
-## ?? Contributing
+##  Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## ?? License
+##  License
 
 This project is part of a Coursera C++ programming course assignment.
 
-## ????? Author
+##  Author
 
 **Villegazs**
 - GitHub: [@Villegazs](https://github.com/Villegazs)
 - Repository: [simulation_crypto_currency_exchange_platform](https://github.com/Villegazs/simulation_crypto_currency_exchange_platform)
 
-## ?? Acknowledgments
+##  Acknowledgments
 
 - Coursera C++ Programming Course
 - Object-Oriented Programming principles
